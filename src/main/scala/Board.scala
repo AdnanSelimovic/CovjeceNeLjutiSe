@@ -23,7 +23,8 @@ class Board {
         // Initialize the circular array representing the spaces on the board
         for (index <- 0 until 40) {
             // For now, let's initialize each space with an empty piece
-            boardSpaces.insert(new Piece(index, "Empty", s"Empty$index"))
+//            boardSpaces.insert(new Piece(index, "Empty", s"Empty$index"))
+            boardSpaces.insert(new Piece(index, "Empty", "Empty"))
         }
 
     }
@@ -117,7 +118,13 @@ class Board {
         val GP3: String = " \u001b[32mG\u001b[0m\u001b[32mP\u001b[0m\u001b[32m3\u001b[0m "
         val GP4: String = " \u001b[32mG\u001b[0m\u001b[32mP\u001b[0m\u001b[32m4\u001b[0m "
 
-        println(YP1 + YP2 + spacing + spacing + path + path + startingPos + spacing + spacing + GP1 + GP2)
+
+        val paths: Seq[String] = (0 until 40).map(index => getColoredPieceName(boardSpaces.get(index)))
+
+        initializeBoard()
+
+        // this still has major issues, need work
+        println(YP1 + YP2 + spacing + spacing + paths(38) + paths(39) + paths(0) + spacing + spacing + GP1 + GP2)
         println()
         println(YP3 + YP4 + spacing + spacing + path + greenO + path + spacing + spacing + GP3 + GP4)
         println()
@@ -147,6 +154,40 @@ class Board {
         } else {
             "Empty"
         }
+    }
+
+    // Helper function to get colored piece name
+//    private def getColoredPieceName(piece: Piece): String = {
+//        if (piece != null) {
+//            val colorCode = getColorCode(piece.getColor())
+//            s" $colorCode${piece.getPieceName()}${Console.RESET} "
+//        } else {
+//            "Empty"
+//        }
+//    }
+
+    // Helper function to get colored piece name
+    private def getColoredPieceName(piece: Piece): String = {
+        if (piece != null) {
+            if (piece.getPieceName() == "Empty") {
+                "  \u001b[37mO\u001b[0m  " // White "O" for "Empty" piece
+            } else {
+                val colorCode = getColorCode(piece.getColor())
+                s" $colorCode${piece.getPieceName()}${Console.RESET} "
+            }
+        } else {
+            "  \u001b[37mO\u001b[0m  " // White "O" for null piece
+        }
+    }
+
+    // Helper function to get ANSI color code based on color string
+    private def getColorCode(color: String): String = color.toLowerCase match {
+        case "red"    => Console.RED
+        case "green"  => Console.GREEN
+        case "yellow" => Console.YELLOW
+        case "blue"   => Console.BLUE
+        case "Empty"  => Console.WHITE
+        case _        => Console.RESET
     }
 
 
