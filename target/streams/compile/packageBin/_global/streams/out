@@ -1,11 +1,21 @@
-[0m[[0m[0mdebug[0m] [0m[0mPackaging C:\Users\User\Desktop\Programming Languages Project\covjece-ne-ljuti-se\target\scala-2.13\hello-world_2.13-1.0.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mPackaging C:\Users\User\Desktop\Programming Languages Project\CovjeceNeLjutiSe\target\scala-2.13\hello-world_2.13-1.0.jar ...[0m
 [0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Board.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\User\Desktop\Programming Languages Project\covjece-ne-ljuti-se\target\scala-2.13\classes\Board.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\User\Desktop\Programming Languages Project\CovjeceNeLjutiSe\target\scala-2.13\classes\Board.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Comments$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\User\Desktop\Programming Languages Project\CovjeceNeLjutiSe\target\scala-2.13\classes\Comments$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Comments$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\User\Desktop\Programming Languages Project\CovjeceNeLjutiSe\target\scala-2.13\classes\Comments$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Comments.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\User\Desktop\Programming Languages Project\CovjeceNeLjutiSe\target\scala-2.13\classes\Comments.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\User\Desktop\Programming Languages Project\covjece-ne-ljuti-se\target\scala-2.13\classes\Main$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\User\Desktop\Programming Languages Project\CovjeceNeLjutiSe\target\scala-2.13\classes\Main$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main$delayedInit$body.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\User\Desktop\Programming Languages Project\covjece-ne-ljuti-se\target\scala-2.13\classes\Main$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\User\Desktop\Programming Languages Project\CovjeceNeLjutiSe\target\scala-2.13\classes\Main$delayedInit$body.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Main.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\User\Desktop\Programming Languages Project\covjece-ne-ljuti-se\target\scala-2.13\classes\Main.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\User\Desktop\Programming Languages Project\CovjeceNeLjutiSe\target\scala-2.13\classes\Main.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Piece.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\User\Desktop\Programming Languages Project\CovjeceNeLjutiSe\target\scala-2.13\classes\Piece.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Player.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\Users\User\Desktop\Programming Languages Project\CovjeceNeLjutiSe\target\scala-2.13\classes\Player.class[0m
 [0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m
