@@ -1,0 +1,7 @@
+[0m[[0m[31merror[0m] [0m[0mC:\Users\User\Desktop\Programming Languages Project\covjece-ne-ljuti-se\src\main\scala\Main.scala:50:180: unclosed string literal[0m
+[0m[[0m[31merror[0m] [0m[0m    println("\u001b[34mBS1\u001b[0m" + "\u001b[34mBS2\u001b[0m" + "   " + "   " + "\u001b[37m O \u001b[0m" + "\u001b[34mBH1\u001b[0m" + "\u001b[37m O \u001b[0m" + "   " + "   " + "\u001b[31mRS1\u001b[0m[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                                                                                                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\User\Desktop\Programming Languages Project\covjece-ne-ljuti-se\src\main\scala\Main.scala:59:5: '}' expected but eof found.[0m
+[0m[[0m[31merror[0m] [0m[0m  }[0m
+[0m[[0m[31merror[0m] [0m[0m   ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
