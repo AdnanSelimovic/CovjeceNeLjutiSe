@@ -90,6 +90,7 @@ class Player(val id: Int, val color: String) {
         val response = scala.io.StdIn.readLine().trim.toLowerCase
         response == "y" || response == "yes"
     }
+    def getPieces: Array[Piece] = pieces.clone()
 
 
 }
