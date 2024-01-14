@@ -43,4 +43,22 @@ object Main extends App {
 
   board.printBoard3()
 
+  board.movePiece(piece1, 2)
+  board.printBoard3()
+
+  board.movePiece(piece1, 4)
+  board.printBoard3()
+
+  board.movePiece(piece2, 6)
+  board.printBoard3()
+
+  board.movePiece(piece1, 17)
+  board.printBoard3()
+
+  board.movePiece(piece1, 12)
+  board.printBoard3()
+
+  board.movePiece(piece1, 3)
+  board.printBoard3()
+
 }
