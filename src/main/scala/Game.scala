@@ -26,35 +26,45 @@ class Game(board: Board, players: Array[Player]) {
 
   private def handlePlayerTurn(player: Player): Unit = {
     println(s"Current Turn: $turnCounter")
-    val hasPieces = !player.noPiecesOnBoard(board)
-    println(s"Player ${player.id} (${player.color}) has pieces on the board: $hasPieces")
     var diceRoll = 0
+    var allowExtraRoll = true
 
+    do {
+      diceRoll = promptForDiceRoll(player)
+      println(s"Dice roll: $diceRoll")
+
+      if (turnCounter == 0 && player.noPiecesOnBoard(board)) {
+        var attempts = 1
+        while (diceRoll != 6 && attempts < 3) {
+          println("Rolling again...")
+          diceRoll = rollDice()
+          println(s"Dice roll: $diceRoll")
+          attempts += 1
+        }
+      }
+
+      if (!player.noPiecesOnBoard(board) || diceRoll == 6) {
+        movePieceBasedOnDiceRoll(player, diceRoll)
+        println("You rolled a 6! Rolling again...")
+        board.printBoard3()
+        allowExtraRoll = diceRoll == 6 && allowExtraRoll
+      } else {
+        println(s"Player ${player.id} skipped as no 6 was rolled.")
+        allowExtraRoll = false
+      }
+    } while (allowExtraRoll)
+
+    // Reset allowExtraRoll for the next turn
+    allowExtraRoll = true
+  }
+
+  private def promptForDiceRoll(player: Player): Int = {
     println(s"Player ${player.id} (${player.color}), type 'throw' to roll the dice.")
     while (scala.io.StdIn.readLine().trim.toLowerCase != "throw") {
       println("Invalid command. Please type 'throw' to roll the dice.")
     }
-
-    diceRoll = rollDice()
-    println(s"Dice roll: $diceRoll")
-
-    if (turnCounter == 0 && player.noPiecesOnBoard(board)) {
-      var attempts = 1
-      while (diceRoll != 6 && attempts < 3) {
-        println("Rolling again...")
-        diceRoll = rollDice()
-        println(s"Dice roll: $diceRoll")
-        attempts += 1
-      }
-    }
-
-    if (player.noPiecesOnBoard(board) && diceRoll != 6) {
-      println(s"Player ${player.id} skipped as no 6 was rolled.")
-    } else {
-      movePieceBasedOnDiceRoll(player, diceRoll)
-    }
+    rollDice()
   }
-
 
   private def rollDice(): Int = {
     Random.nextInt(6) + 1
