@@ -59,6 +59,37 @@ class Player(val id: Int, val color: String) {
         !safeHouse.contains(null)
     }
 
+    // Function to check if the player has no pieces on the board
+    def noPiecesOnBoard(board: Board): Boolean = {
+        // Checking if all player's pieces are not on the board
+        pieces.forall(piece => board.findPiecePosition(piece).isEmpty)
+    }
+
+    // Function to allow the player to select a piece to move
+    def selectPieceToMove(board: Board): Int = {
+        // Filter to get only the pieces that are on the board
+        val piecesOnBoard = pieces.filter(piece => board.findPiecePosition(piece).isDefined)
+
+        println(s"Player $id (${color}), select a piece to move:")
+        for (i <- piecesOnBoard.indices) {
+            println(s"${i + 1}: Piece ${piecesOnBoard(i).getPieceName()}")
+        }
+
+        var selectedPieceIndex = -1
+        do {
+            print("Enter the number of the piece you want to move: ")
+            selectedPieceIndex = scala.io.StdIn.readInt() - 1
+        } while (selectedPieceIndex < 0 || selectedPieceIndex >= piecesOnBoard.length)
+
+        // Return the pieceId of the selected piece
+        piecesOnBoard(selectedPieceIndex).getPieceId()
+    }
+
+    def askIfStartNewPiece(): Boolean = {
+        print(s"Player $id, do you want to start a new piece? (y/N): ")
+        val response = scala.io.StdIn.readLine().trim.toLowerCase
+        response == "y" || response == "yes"
+    }
 
 
 }

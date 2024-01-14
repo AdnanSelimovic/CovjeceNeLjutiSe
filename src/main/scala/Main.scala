@@ -22,43 +22,32 @@ object Main extends App {
   // Initialize the board
   board.initializeBoard()
 
+  // Initialize players
+  val players = Array(
+    new Player(1, "red"),
+    new Player(2, "green"),
+    new Player(3, "blue"),
+    new Player(4, "yellow")
+  )
+
+  // Initialize player pieces
+  players.foreach(_.initializePieces())
+
+  // Initialize and start the game
+  val game = new Game(board, players)
+  game.startGame()
+
   // Create pieces for testing
-  val piece1 = new Piece(1, "red", "RP1")
-  val piece2 = new Piece(2, "green", "GP2")
+ // val piece1 = new Piece(1, "red", "RP1")
+  //val piece2 = new Piece(2, "green", "GP2")
 
   // Insert pieces at starting positions
-  board.insertPieceAtStart(piece1, "red")
-  board.insertPieceAtStart(piece2, "green")
+  //board.insertPieceAtStart(piece1, "red")
+  //board.insertPieceAtStart(piece2, "green")
+  board.printBoard3();
 
-  // Print the board after inserting pieces
-  board.printBoard()
 
-  // Move a piece
-  board.movePiece(piece1, 3)
 
-  // Print the board after moving the piece
-  board.printBoard()
 
-  board.printBoard2()
-
-  board.printBoard3()
-
-  board.movePiece(piece1, 2)
-  board.printBoard3()
-
-  board.movePiece(piece1, 4)
-  board.printBoard3()
-
-  board.movePiece(piece2, 6)
-  board.printBoard3()
-
-  board.movePiece(piece1, 17)
-  board.printBoard3()
-
-  board.movePiece(piece1, 12)
-  board.printBoard3()
-
-  board.movePiece(piece1, 3)
-  board.printBoard3()
 
 }

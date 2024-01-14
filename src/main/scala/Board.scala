@@ -103,8 +103,15 @@ class Board {
 
 
     // Helper function to find the position of a piece on the board
-    private def findPiecePosition(piece: Piece): Option[Int] = {
+    /*def findPiecePosition(piece: Piece): Option[Int] = {
         (0 until 40).find(index => boardSpaces.get(index) == piece)
+    }*/
+
+    def findPiecePosition(piece: Piece): Option[Int] = {
+        (0 until 40).find(index => {
+            val boardPiece = boardSpaces.get(index)
+            boardPiece != null && boardPiece.pieceId == piece.pieceId && boardPiece.color == piece.color
+        })
     }
 
     // Function to print the current state of the board
