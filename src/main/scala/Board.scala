@@ -165,7 +165,7 @@ class Board {
         println()
         println(BP3 + BP3 + spacing + spacing + paths(20) + paths(19) + paths(18) + spacing + spacing + RP3 + RP4)
     }
-    def printBoard4(players: Array[Player]): Unit = {
+    def printBoard4(players: Array[Player], turnCounter: Int): Unit = {
         val path: String = "  \u001b[37mO\u001b[0m  "
         val greenO: String = "  \u001b[32mO\u001b[0m  "
         val redO: String = "  \u001b[31mO\u001b[0m  "
@@ -195,6 +195,7 @@ class Board {
         val paths: Seq[String] = (0 until 40).map(index => getColoredPieceName(boardSpaces.get(index)))
 
         //        initializeBoard()
+
 
         // this still has major issues, need work
         println(YP1 + YP2 + spacing + spacing + paths(38) + paths(39) + paths(0) + spacing + spacing + GP1 + GP2)
@@ -228,6 +229,7 @@ class Board {
                 if ((index + 1) % safeHouseStatus.length == 0) println()
             }
         }
+        println("Current Turn is: " + turnCounter)
 
 
     }

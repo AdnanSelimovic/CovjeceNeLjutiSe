@@ -11,7 +11,7 @@ class Game(board: Board, players: Array[Player]) {
     while (!gameEnded) {
       val currentPlayer = players(currentPlayerIndex)
       println(s"\nCurrent Board:")
-      board.printBoard4(players)
+      board.printBoard4(players, turnCounter)
       println(s"Player ${currentPlayer.id}'s (${currentPlayer.color}) turn:")
       handlePlayerTurn(currentPlayer)
 
@@ -53,7 +53,7 @@ class Game(board: Board, players: Array[Player]) {
         movePieceBasedOnDiceRoll(player, diceRoll)
         if (diceRoll == 6) {
           println("You rolled a 6! Rolling again...")
-          board.printBoard4(players)
+          board.printBoard4(players, turnCounter)
         }
         allowExtraRoll = diceRoll == 6 && allowExtraRoll
       } else {
