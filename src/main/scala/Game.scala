@@ -10,7 +10,7 @@ class Game(board: Board, players: Array[Player]) {
     while (!isGameOver) {
       val currentPlayer = players(currentPlayerIndex)
       println(s"\nCurrent Board:")
-      board.printBoard3()
+      board.printBoard4(players)
       println(s"Player ${currentPlayer.id}'s (${currentPlayer.color}) turn:")
       handlePlayerTurn(currentPlayer)
 
@@ -48,7 +48,7 @@ class Game(board: Board, players: Array[Player]) {
         movePieceBasedOnDiceRoll(player, diceRoll)
         if (diceRoll == 6) {
           println("You rolled a 6! Rolling again...")
-          board.printBoard3()
+          board.printBoard4(players)
         }
         allowExtraRoll = diceRoll == 6 && allowExtraRoll
       } else {
@@ -64,14 +64,16 @@ class Game(board: Board, players: Array[Player]) {
   private def promptForDiceRoll(player: Player): Int = {
     println(s"Player ${player.id} (${player.color}), type 'throw' to roll the dice.")
     var input_throw = scala.io.StdIn.readLine().trim.toLowerCase
-    while (input_throw != "throw" && input_throw != "lucky") {
+    while (input_throw != "throw" && input_throw != "lucky" && input_throw != "kec") {
       println("Invalid command. Please type 'throw' to roll the dice.")
       input_throw = scala.io.StdIn.readLine().trim.toLowerCase
     }
     if (input_throw == "throw"){
       rollDice()
-    } else{
+    } else if(input_throw =="lucky"){
       rollDiceCheat()
+    } else{
+      rollDiceCheat1()
     }
 
   }
@@ -82,6 +84,9 @@ class Game(board: Board, players: Array[Player]) {
 
   private def rollDiceCheat(): Int = {
     6
+  }
+  private def rollDiceCheat1(): Int = {
+    1
   }
 
   private def movePieceBasedOnDiceRoll(player: Player, diceRoll: Int): Unit = {

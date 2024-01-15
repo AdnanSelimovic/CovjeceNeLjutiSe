@@ -2,8 +2,12 @@ import scala.Array
 
 class Player(val id: Int, val color: String) {
     private var pieces: Array[Piece] = new Array[Piece](4)
-    private var safeHouse: Array[Piece] = new Array[Piece](4)
+    //private var safeHouse: Array[Piece] = new Array[Piece](4)
     private var pieceCount = 0
+
+
+    private val safeHouseTrackLength = 4
+    private var safeHouse: Array[Option[Piece]] = Array.fill(safeHouseTrackLength)(None)
 
     def initializePieces(): Unit = {
         for (i <- pieces.indices) {
@@ -21,17 +25,7 @@ class Player(val id: Int, val color: String) {
     }
 
     // Function to print pieces in the safeHouse
-    def printSafeHouse(): Unit = {
-        if (safeHouse != null) {
-            for (i <- 0 until 4) {
-                if (safeHouse(i) != null) {
-                    println(safeHouse(i).getPieceName())
-                } else {
-                    println("Empty slot in safeHouse")
-                }
-            }
-        }
-    }
+
 
     // Function to get a Piece by its pieceId
     def getPieceById(pieceId: Int): Piece = {
@@ -39,26 +33,10 @@ class Player(val id: Int, val color: String) {
     }
 
     // Function to enter a piece into the safeHouse
-    def enterPiece(pieceId: Int): Unit = {
-        val piece = getPieceById(pieceId)
 
-        if (piece != null) {
-            if (safeHouse.contains(null)) {
-                val emptyIndex = safeHouse.indexOf(null)
-                safeHouse(emptyIndex) = piece
-                println(s"Piece ${piece.getPieceName()} entered the safeHouse.")
-            } else {
-                println("SafeHouse is full. Cannot enter more pieces.")
-            }
-        } else {
-            println("Invalid piece ID. Cannot enter piece into the safeHouse.")
-        }
-    }
 
     // Function to check if the safeHouse is full
-    def isSafeHouseFull: Boolean = {
-        !safeHouse.contains(null)
-    }
+
 
     // Function to check if the player has no pieces on the board
     def noPiecesOnBoard(board: Board): Boolean = {
@@ -98,18 +76,21 @@ class Player(val id: Int, val color: String) {
         pieceCount
     }
 
-    def enterPieceIntoSafeHouse(piece: Piece): Unit = {
-        // Find the first empty slot in the safe house
-        val emptyIndex = safeHouse.indexOf(null)
+    def movePieceToSafeHouse(piece: Piece, steps: Int): Boolean = {
+        val safeHouseIndex = safeHouse.indexOf(None)
 
-        // If there is an empty slot, place the piece there
-        if (emptyIndex != -1) {
-            safeHouse(emptyIndex) = piece
-            println(s"Piece ${piece.getPieceName()} entered the safe house.")
+        if (safeHouseIndex != -1 && steps <= safeHouseTrackLength - safeHouseIndex) {
+            // There is space in the safe house and the piece can move the required steps
+            safeHouse(safeHouseIndex) = Some(piece)
+            true // Piece successfully moved to the safe house
         } else {
-            println("No empty slots in the safe house.")
+            false // No space or too many steps to move into the safe house
         }
     }
+
+
+    def getSafeHouseStatus: Array[Option[Piece]] = safeHouse
+
 
 
 }
