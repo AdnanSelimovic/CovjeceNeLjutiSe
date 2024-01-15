@@ -66,32 +66,24 @@ class Board {
 //    }
 
     //Function to move a piece on the board
-    def movePiece(piece: Piece, steps: Int): Unit = {
+    def movePiece(piece: Piece, steps: Int, player: Player): Unit = {
         val currentPosition = findPiecePosition(piece)
 
-        // Ensure the piece is on the board
         if (currentPosition.isDefined) {
             val newPosition = (currentPosition.get + steps) % 40
 
-            // Check for special spaces (safe houses)
-            if (safeHouseEntrances.values.toList.contains(newPosition)) {
-                // Implement logic for safe houses
-                val color = piece.getColor()
-                val safeHouseColor = safeHouseEntrances.find { case (_, position) => position == newPosition }.map(_._1)
-
-                if (safeHouseColor.contains(color)) {
-                    // The piece reached its own safe house
-                    println(s"Piece ${piece.getPieceName()} reached its own safe house.")
-                } else {
-                    // The piece entered an opponent's safe house, continue moving normally
-                    boardSpaces.set(currentPosition.get, new Piece(currentPosition.get, "Empty", "Empty"))
-                    boardSpaces.set(newPosition, piece)
-                    println(s"Piece ${piece.getPieceName()} moved to position $newPosition.")
-                    return // Skip the rest of the function to prevent additional messages
-                }
+            if (safeHouseEntrances.get(player.color).contains(newPosition)) {
+                // Move piece into player's safe house
+                player.enterPieceIntoSafeHouse(piece)
+                boardSpaces.set(currentPosition.get, new Piece(currentPosition.get, "Empty", "Empty"))
+                println(s"Piece ${piece.getPieceName()} entered its safe house.")
             } else {
                 // Regular movement
+
                 boardSpaces.set(currentPosition.get, new Piece(currentPosition.get, "Empty", "Empty"))
+                if (boardSpaces.get(newPosition).getColor != "Empty" && boardSpaces.get(newPosition).getColor != piece.getColor()) {
+                    // Implement logic for capturing an opponent's piece
+                }
                 boardSpaces.set(newPosition, piece)
                 println(s"Piece ${piece.getPieceName()} moved to position $newPosition.")
             }

@@ -98,5 +98,18 @@ class Player(val id: Int, val color: String) {
         pieceCount
     }
 
+    def enterPieceIntoSafeHouse(piece: Piece): Unit = {
+        // Find the first empty slot in the safe house
+        val emptyIndex = safeHouse.indexOf(null)
+
+        // If there is an empty slot, place the piece there
+        if (emptyIndex != -1) {
+            safeHouse(emptyIndex) = piece
+            println(s"Piece ${piece.getPieceName()} entered the safe house.")
+        } else {
+            println("No empty slots in the safe house.")
+        }
+    }
+
 
 }

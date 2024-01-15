@@ -92,7 +92,7 @@ class Game(board: Board, players: Array[Player]) {
     } else {
       val pieceId = player.selectPieceToMove(board)
       val piece = player.getPieceById(pieceId)
-      board.movePiece(piece, diceRoll)
+      board.movePiece(piece, diceRoll, player)
     }
   }
 
