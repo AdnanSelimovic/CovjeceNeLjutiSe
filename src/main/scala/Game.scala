@@ -6,6 +6,7 @@ class Game(board: Board, players: Array[Player]) {
   private var turnCounter = 0
 
   def startGame(): Unit = {
+
     while (!isGameOver) {
       val currentPlayer = players(currentPlayerIndex)
       println(s"\nCurrent Board:")
@@ -45,8 +46,10 @@ class Game(board: Board, players: Array[Player]) {
 
       if (!player.noPiecesOnBoard(board) || diceRoll == 6) {
         movePieceBasedOnDiceRoll(player, diceRoll)
-        println("You rolled a 6! Rolling again...")
-        board.printBoard3()
+        if (diceRoll == 6) {
+          println("You rolled a 6! Rolling again...")
+          board.printBoard3()
+        }
         allowExtraRoll = diceRoll == 6 && allowExtraRoll
       } else {
         println(s"Player ${player.id} skipped as no 6 was rolled.")
@@ -60,23 +63,33 @@ class Game(board: Board, players: Array[Player]) {
 
   private def promptForDiceRoll(player: Player): Int = {
     println(s"Player ${player.id} (${player.color}), type 'throw' to roll the dice.")
-    while (scala.io.StdIn.readLine().trim.toLowerCase != "throw") {
+    var input_throw = scala.io.StdIn.readLine().trim.toLowerCase
+    while (input_throw != "throw" && input_throw != "lucky") {
       println("Invalid command. Please type 'throw' to roll the dice.")
+      input_throw = scala.io.StdIn.readLine().trim.toLowerCase
     }
-    rollDice()
+    if (input_throw == "throw"){
+      rollDice()
+    } else{
+      rollDiceCheat()
+    }
+
   }
 
   private def rollDice(): Int = {
     Random.nextInt(6) + 1
   }
 
+  private def rollDiceCheat(): Int = {
+    6
+  }
+
   private def movePieceBasedOnDiceRoll(player: Player, diceRoll: Int): Unit = {
     if (player.noPiecesOnBoard(board) || (diceRoll == 6 && player.askIfStartNewPiece)) {
-      // Start a new piece if no pieces on board or player chooses to start a new one on a roll of 6
-      val newPiece = new Piece(1, player.color, s"${player.color.charAt(0).toUpper}P1") // You can enhance the logic to choose which piece to start
+      val pieceId = player.getNextPieceId
+      val newPiece = new Piece(pieceId, player.color, s"${player.color.charAt(0).toUpper}P$pieceId")
       board.insertPieceAtStart(newPiece, player.color)
     } else {
-      // Move an existing piece
       val pieceId = player.selectPieceToMove(board)
       val piece = player.getPieceById(pieceId)
       board.movePiece(piece, diceRoll)

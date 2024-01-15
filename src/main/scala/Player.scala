@@ -3,6 +3,7 @@ import scala.Array
 class Player(val id: Int, val color: String) {
     private var pieces: Array[Piece] = new Array[Piece](4)
     private var safeHouse: Array[Piece] = new Array[Piece](4)
+    private var pieceCount = 0
 
     def initializePieces(): Unit = {
         for (i <- pieces.indices) {
@@ -91,6 +92,11 @@ class Player(val id: Int, val color: String) {
         response == "y" || response == "yes"
     }
     def getPieces: Array[Piece] = pieces.clone()
+
+    def getNextPieceId: Int = {
+        pieceCount += 1
+        pieceCount
+    }
 
 
 }
