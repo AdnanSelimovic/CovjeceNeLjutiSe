@@ -6,23 +6,28 @@ class Game(board: Board, players: Array[Player]) {
   private var turnCounter = 0
 
   def startGame(): Unit = {
+    var gameEnded = false
 
-    while (!isGameOver) {
+    while (!gameEnded) {
       val currentPlayer = players(currentPlayerIndex)
       println(s"\nCurrent Board:")
       board.printBoard4(players)
       println(s"Player ${currentPlayer.id}'s (${currentPlayer.color}) turn:")
       handlePlayerTurn(currentPlayer)
 
-      // Proceed to next player
-      currentPlayerIndex = (currentPlayerIndex + 1) % players.length
-      if (currentPlayerIndex == 0) {
-        turnCounter += 1
+      if (currentPlayer.isSafeHouseFull) {
+        println(s"NUMBER #${currentPlayer.id} VICTORY ROYALE!")
+        gameEnded = true
+      } else {
+        // Proceed to next player
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.length
+        if (currentPlayerIndex == 0) {
+          turnCounter += 1
+        }
       }
     }
 
-    println(s"Game Over after $turnCounter turns")
-    // Add logic to declare the winner
+    println("Game Over")
   }
 
   private def handlePlayerTurn(player: Player): Unit = {
@@ -64,7 +69,7 @@ class Game(board: Board, players: Array[Player]) {
   private def promptForDiceRoll(player: Player): Int = {
     println(s"Player ${player.id} (${player.color}), type 'throw' to roll the dice.")
     var input_throw = scala.io.StdIn.readLine().trim.toLowerCase
-    while (input_throw != "throw" && input_throw != "lucky" && input_throw != "kec") {
+    while (input_throw != "throw" && input_throw != "lucky" && input_throw != "kec" && input_throw != "tri") {
       println("Invalid command. Please type 'throw' to roll the dice.")
       input_throw = scala.io.StdIn.readLine().trim.toLowerCase
     }
@@ -72,8 +77,10 @@ class Game(board: Board, players: Array[Player]) {
       rollDice()
     } else if(input_throw =="lucky"){
       rollDiceCheat()
-    } else{
+    } else if(input_throw =="kec"){
       rollDiceCheat1()
+    } else {
+      tripet()
     }
 
   }
@@ -87,6 +94,9 @@ class Game(board: Board, players: Array[Player]) {
   }
   private def rollDiceCheat1(): Int = {
     1
+  }
+  private def tripet(): Int = {
+    35
   }
 
   private def movePieceBasedOnDiceRoll(player: Player, diceRoll: Int): Unit = {

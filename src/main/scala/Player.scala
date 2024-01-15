@@ -91,6 +91,10 @@ class Player(val id: Int, val color: String) {
 
     def getSafeHouseStatus: Array[Option[Piece]] = safeHouse
 
+    def isSafeHouseFull: Boolean = {
+        safeHouse.count(_.isDefined) == 4
+    }
+
 
 
 }
